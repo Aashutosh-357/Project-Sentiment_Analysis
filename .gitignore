@@ -1,18 +1,47 @@
-# Python
+# ------------------------------------
+# 1. Environment & Dependencies
+# ------------------------------------
+# Ignore virtual environments
 venv/
-.env/
+env/
+*.egg-info/
+
+# Ignore compiled Python files
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-pip-log.txt
+*.py[cod]
 
-# Jupyter Notebook
-.ipynb_checkpoints/
+# ------------------------------------
+# 2. Machine Learning Assets (CRUCIAL)
+# ------------------------------------
+# Binary files that can be very large and should not be tracked by Git
+# This ensures your 'models/' folder is ignored.
+models/
 
-# IDE
+# Ignore large raw data files (if applicable)
+# If IMDB_.csv is very large, keep this line.
+IMDB_.csv
+
+# ------------------------------------
+# 3. Development / Notebook Files
+# ------------------------------------
+# Ignore Jupyter/Colab checkpoints
+.ipynb_checkpoints
+
+# ------------------------------------
+# 4. Deployment Files
+# ------------------------------------
+# Gunicorn files (if used)
+# gunicorn.py
+# gunicorn.log
+
+# ------------------------------------
+# 5. Operating System / IDE Files
+# ------------------------------------
+# macOS files
+.DS_Store
+
+# VS Code directory
 .vscode/
+
+# PyCharm / IntelliJ
 .idea/
-*.swp
-*.swo
