@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis MVP</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f7f6; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #2c3e50; }
+        textarea { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; resize: vertical; }
+        button { background-color: #3498db; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background-color: #2980b9; }
+        .result-box { margin-top: 30px; padding: 20px; border-radius: 4px; border-left: 5px solid #2ecc71; background-color: #ecf0f1; }
+        .result-box.negative { border-left-color: #e74c3c; }
+        .result-box h3 { margin-top: 0; color: #2c3e50; }
+        .positive-text { color: #2ecc71; font-weight: bold; }
+        .negative-text { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis Tool</h1>
+        <p>A portfolio piece demonstrating MLOps deployment (Flask + Sklearn)</p>
+
+        <form method="POST" action="/predict">
+            <textarea name="text_input" rows="5" placeholder="Enter the text you want to analyze..." required>{{ user_input or '' }}</textarea>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result-box {% if prediction == 'Negative' %}negative{% endif %}">
+            <h3>Analysis Result:</h3>
+            <p><strong>Input:</strong> "{{ user_input }}"</p>
+            <p><strong>Predicted Sentiment:</strong> 
+                <span class="{% if prediction == 'Positive' %}positive-text{% else %}negative-text{% endif %}">
+                    {{ prediction }}
+                </span>
+            </p>
+            <p><strong>Confidence:</strong> {{ confidence }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
