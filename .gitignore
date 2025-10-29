@@ -10,13 +10,6 @@ env/
 __pycache__/
 *.py[cod]
 
-# ------------------------------------
-# 2. Machine Learning Assets (CRUCIAL)
-# ------------------------------------
-# Binary files that can be very large and should not be tracked by Git
-# This ensures your 'models/' folder is ignored.
-models/
-
 # Ignore large raw data files (if applicable)
 # If IMDB_.csv is very large, keep this line.
 IMDB_.csv
