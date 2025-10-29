@@ -21,11 +21,12 @@ MODEL_PATH = BASE_DIR / 'models' / 'sentiment_model.pkl'
 VECTORIZER_PATH = BASE_DIR / 'models' / 'vectorizer.pkl'
 # --- End Robust Pathing Fix ---
 
-# Download NLTK stopwords (only if needed)
+import nltk
 try:
     nltk.data.find('corpora/stopwords')
-except nltk.downloader.DownloadError:
-    nltk.download('stopwords', quiet=True)
+except LookupError:
+    # This line downloads the data if it's missing
+    nltk.download('stopwords')
 
 stop_words = set(stopwords.words('english'))
 stemmer = PorterStemmer()
