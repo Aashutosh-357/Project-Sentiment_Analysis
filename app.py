@@ -1,17 +1,13 @@
-import joblib
-import re
+from flask import Flask, request, jsonify, render_template
+import joblib, re, os
 from pathlib import Path 
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
-from flask import Flask, request, jsonify, render_template
-
+nltk.download('stopwords')
 
 # 1. Initialize Flask app and Load Resources:
-
-app = Flask(__name__)
-
 
 # Ensure templates directory exists and is configured
 
@@ -21,15 +17,8 @@ MODEL_PATH = BASE_DIR / 'models' / 'sentiment_model.pkl'
 VECTORIZER_PATH = BASE_DIR / 'models' / 'vectorizer.pkl'
 # --- End Robust Pathing Fix ---
 
-import nltk
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    # This line downloads the data if it's missing
-    nltk.download('stopwords')
+app = Flask(__name__)
 
-stop_words = set(stopwords.words('english'))
-stemmer = PorterStemmer()
 
 # Load the trained model and vectorizer using robust paths
 try:
@@ -58,7 +47,9 @@ def preprocess_txt(txt):
     txt = txt.lower()
     txt = re.sub(r'[^\w\s]', '', txt)
     tokens = txt.split()
+    stop_words = set(stopwords.words('english'))
     tokens = [word for word in tokens if word not in stop_words]
+    stemmer = PorterStemmer()
     tokens = [stemmer.stem(word) for word in tokens]
     return " ".join(tokens)
 
